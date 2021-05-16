@@ -1,4 +1,4 @@
-package br.com.luiz.entities;
+package br.com.luiz.entities.enums;
 
 public enum TipoLancamento {
 	
