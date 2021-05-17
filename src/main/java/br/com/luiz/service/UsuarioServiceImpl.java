@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.luiz.entities.Usuario;
+import br.com.luiz.entities.dto.UsuarioDTO;
 import br.com.luiz.repository.UsuarioRepository;
 import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
@@ -26,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	@Transactional(readOnly = true)
 	public Usuario salvarUsuario(Usuario usuario) {
-		this.validarEmail(usuario.getEmail());
+		//this.validarEmail(usuario.getEmail());
 		
 		return repo.save(usuario);
 	}
