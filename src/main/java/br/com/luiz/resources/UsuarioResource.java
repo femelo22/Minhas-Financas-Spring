@@ -1,7 +1,7 @@
 package br.com.luiz.resources;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.luiz.entities.Usuario;
 import br.com.luiz.entities.dto.UsuarioDTO;
-import br.com.luiz.service.UsuarioService;
 import br.com.luiz.service.UsuarioServiceImpl;
+import br.com.luiz.service.exception.RegraNegocioException;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -19,23 +19,23 @@ public class UsuarioResource {
 	
 	@Autowired
 	private UsuarioServiceImpl userService;
-	
-	@Autowired
-	private ModelMapper modelMapper;
-	
-	@PostMapping
-	public ResponseEntity<Usuario> salvar (@RequestBody UsuarioDTO objDTO) {
-		
-		Usuario user = this.retornarUsuarioDTO(objDTO);
-		
-		Usuario newUser = this.userService.salvarUsuario(user);
-		
-		return ResponseEntity.ok().body(newUser);
-	}
-	
 
-	public Usuario retornarUsuarioDTO(UsuarioDTO usuario) {
-		return modelMapper.map(usuario, Usuario.class);
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@PostMapping
+	public ResponseEntity salvar (@RequestBody UsuarioDTO objDTO) {
+		
+		Usuario usuario = this.userService.getUserDto(objDTO);
+		
+		try {
+			Usuario usuarioSalvo = this.userService.salvarUsuario(usuario);
+			
+			return new ResponseEntity(usuarioSalvo, HttpStatus.CREATED);
+			
+		} catch (RegraNegocioException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
 	}
 
 }

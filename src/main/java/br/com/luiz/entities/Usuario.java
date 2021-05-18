@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.luiz.entities.dto.UsuarioDTO;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -23,6 +25,12 @@ public class Usuario {
 
 	@Column(name = "senha")
 	private String senha;
+	
+	public Usuario(UsuarioDTO obj) {
+		this.nome = obj.getNome();
+		this.email = obj.getEmail();
+		this.senha = obj.getSenha();
+	}
 
 	public Integer getId() {
 		return id;

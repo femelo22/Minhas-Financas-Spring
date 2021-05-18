@@ -18,7 +18,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario autenticar(String email, String senha) {
-		Usuario user = this.repo.findByEmail(email, senha)
+		Usuario user = this.repo.findByEmailAndSenha(email, senha)
 				.orElseThrow(() -> new ErroAutenticacaoException("Usuário não encontrado!"));
 		
 		return user;
@@ -41,6 +41,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new RegraNegocioException("Usuário já cadastrado com esse email");
 		}
 		
+	}
+	
+	public Usuario getUserDto(UsuarioDTO userDto) {
+		return new Usuario(userDto);
 	}
 
 }
