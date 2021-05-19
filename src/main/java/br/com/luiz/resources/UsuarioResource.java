@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.luiz.entities.Usuario;
+import br.com.luiz.entities.dto.UserAuthenticatedDTO;
 import br.com.luiz.entities.dto.UsuarioDTO;
 import br.com.luiz.service.UsuarioServiceImpl;
+import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @RestController
@@ -36,6 +38,20 @@ public class UsuarioResource {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		
+	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@PostMapping(value = "/autenticar")
+	public ResponseEntity autenticar (@RequestBody  UserAuthenticatedDTO objDTO) {
+		try {
+			Usuario usuario = this.userService.autenticar(objDTO.getEmail(), objDTO.getSenha());
+			
+			return ResponseEntity.ok().body(usuario);
+			
+		} catch (ErroAutenticacaoException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 
 }
