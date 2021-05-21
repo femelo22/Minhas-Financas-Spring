@@ -16,7 +16,7 @@ import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/usuarios")
 public class UsuarioResource {
 	
 	@Autowired

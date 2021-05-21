@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.luiz.entities.Lancamento;
+import br.com.luiz.entities.Usuario;
+import br.com.luiz.entities.dto.LancamentoDTO;
 import br.com.luiz.entities.enums.StatusLancamento;
+import br.com.luiz.entities.enums.TipoLancamento;
 import br.com.luiz.repository.LancamentoRepository;
+import br.com.luiz.repository.UsuarioRepository;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @Service
@@ -21,6 +25,9 @@ public class LancamentoService {
 
 	@Autowired
 	LancamentoRepository repository;
+	
+	@Autowired
+	UsuarioRepository userRepository;
 	
 
 	@Transactional
@@ -88,6 +95,25 @@ public class LancamentoService {
 		
 	}
 	
+	
+	public Lancamento converterDto(LancamentoDTO objDto) {
+		
+		Lancamento lancamento = new Lancamento();
+		
+		lancamento.setDescricao(objDto.getDescricao());
+		lancamento.setAno(objDto.getAno());
+		lancamento.setMes(objDto.getAno());
+		lancamento.setValor(objDto.getValor());
+		
+		Usuario usuario = this.userRepository.findById(objDto.getIdUsuario())
+				.orElseThrow(() -> new RegraNegocioException("Usuário não encontrado"));
+		
+		lancamento.setUsuario(usuario);
+		lancamento.setTipoLancamento(TipoLancamento.valueOf(objDto.getTipo()));
+		lancamento.setStatusLancamento(StatusLancamento.valueOf(objDto.getStatus()));
+		
+		return lancamento;
+	}
 	
 	
 	
