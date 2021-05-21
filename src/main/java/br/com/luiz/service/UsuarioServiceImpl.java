@@ -11,12 +11,12 @@ import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl {
 	
 	@Autowired
 	private UsuarioRepository repo;
 
-	@Override
+	
 	public Usuario autenticar(String email, String senha) {
 		Usuario user = this.repo.findByEmailAndSenha(email, senha)
 				.orElseThrow(() -> new ErroAutenticacaoException("Usuário não encontrado!"));
@@ -24,15 +24,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return user;
 	}
 
-	@Override
+	
 	@Transactional(readOnly = true)
 	public Usuario salvarUsuario(Usuario usuario) {
-		//this.validarEmail(usuario.getEmail());
+		this.validarEmail(usuario.getEmail());
 		
 		return repo.save(usuario);
 	}
+	
 
-	@Override
 	public void validarEmail(String email) {
 		
 		boolean existe = this.repo.existsByEmail(email);
