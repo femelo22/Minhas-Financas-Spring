@@ -1,8 +1,12 @@
 package br.com.luiz.resources;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.luiz.entities.Usuario;
 import br.com.luiz.entities.dto.UserAuthenticatedDTO;
 import br.com.luiz.entities.dto.UsuarioDTO;
-import br.com.luiz.service.UsuarioServiceImpl;
+import br.com.luiz.service.LancamentoService;
+import br.com.luiz.service.UsuarioService;
 import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
 
@@ -20,7 +25,10 @@ import br.com.luiz.service.exception.RegraNegocioException;
 public class UsuarioResource {
 	
 	@Autowired
-	private UsuarioServiceImpl userService;
+	private UsuarioService userService;
+	
+	@Autowired
+	private LancamentoService lancamentoService;
 
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -52,6 +60,17 @@ public class UsuarioResource {
 		} catch (ErroAutenticacaoException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
+	}
+	
+	
+	@GetMapping("{id}/saldo")
+	public ResponseEntity obterSaldo(@PathVariable Integer id) {
+		
+		this.userService.buscarPorId(id);
+		
+		BigDecimal saldo = this.lancamentoService.obterSaldoPorUsuario(id);
+		
+		return ResponseEntity.ok().body(saldo);
 	}
 
 }

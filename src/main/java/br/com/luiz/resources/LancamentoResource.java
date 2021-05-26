@@ -21,7 +21,7 @@ import br.com.luiz.entities.dto.AtualizaStatusDTO;
 import br.com.luiz.entities.dto.LancamentoDTO;
 import br.com.luiz.entities.enums.StatusLancamento;
 import br.com.luiz.service.LancamentoService;
-import br.com.luiz.service.UsuarioServiceImpl;
+import br.com.luiz.service.UsuarioService;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @RestController
@@ -32,7 +32,7 @@ public class LancamentoResource {
 	LancamentoService service;
 	
 	@Autowired
-	UsuarioServiceImpl usuarioService;
+	UsuarioService usuarioService;
 
 	@PostMapping
 	public ResponseEntity salvar(@RequestBody LancamentoDTO objDto) {

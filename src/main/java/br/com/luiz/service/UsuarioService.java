@@ -11,7 +11,7 @@ import br.com.luiz.service.exception.ErroAutenticacaoException;
 import br.com.luiz.service.exception.RegraNegocioException;
 
 @Service
-public class UsuarioServiceImpl {
+public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repo;

@@ -130,6 +130,24 @@ public class LancamentoService {
 	}
 	
 	
+	@Transactional(readOnly = true)
+	public BigDecimal obterSaldoPorUsuario(Integer id) {
+		
+		BigDecimal receitas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.RECEITA);
+		BigDecimal despesas = repository.obterSaldoPorTipoLancamentoEUsuario(id, TipoLancamento.DESPESA);
+		
+		if(receitas == null) {
+			receitas = BigDecimal.ZERO;
+		}
+		
+		if(despesas == null) {
+			despesas = BigDecimal.ZERO;
+		}
+		
+		return receitas.subtract(despesas);
+		
+	}
+	
 	
 	
 }

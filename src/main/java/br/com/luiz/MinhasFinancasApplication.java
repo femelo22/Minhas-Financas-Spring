@@ -12,13 +12,13 @@ import br.com.luiz.entities.Usuario;
 import br.com.luiz.entities.enums.StatusLancamento;
 import br.com.luiz.entities.enums.TipoLancamento;
 import br.com.luiz.service.LancamentoService;
-import br.com.luiz.service.UsuarioServiceImpl;
+import br.com.luiz.service.UsuarioService;
 
 @SpringBootApplication
 public class MinhasFinancasApplication implements CommandLineRunner {
 
 	@Autowired
-	UsuarioServiceImpl userService;
+	UsuarioService userService;
 
 	@Autowired
 	LancamentoService lancamentoService;
@@ -49,9 +49,9 @@ public class MinhasFinancasApplication implements CommandLineRunner {
 		lan1.setId(null);
 		lan1.setAno(2021);
 		lan1.setMes(01);
-		lan1.setDescricao("Pagamento Ifood");
+		lan1.setDescricao("Pagamento Consultoria");
 		lan1.setStatusLancamento(StatusLancamento.PENDENTE);
-		lan1.setTipoLancamento(TipoLancamento.DESPESA);
+		lan1.setTipoLancamento(TipoLancamento.RECEITA);
 		lan1.setUsuario(usu1);
 		lan1.setValor(BigDecimal.valueOf(300));
 
