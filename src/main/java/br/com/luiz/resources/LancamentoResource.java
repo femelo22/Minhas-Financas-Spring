@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.luiz.entities.Lancamento;
 import br.com.luiz.entities.Usuario;
+import br.com.luiz.entities.dto.AtualizaStatusDTO;
 import br.com.luiz.entities.dto.LancamentoDTO;
+import br.com.luiz.entities.enums.StatusLancamento;
 import br.com.luiz.service.LancamentoService;
 import br.com.luiz.service.UsuarioServiceImpl;
 import br.com.luiz.service.exception.RegraNegocioException;
@@ -90,7 +92,24 @@ public class LancamentoResource {
 		}
 	}
 	
-
+	
+	@PutMapping("/{id}/status")
+	public ResponseEntity atualizarStatus(@PathVariable Integer id, @RequestBody AtualizaStatusDTO objDto) {
+		
+			Lancamento lancamento = this.service.obterPorId(id);
+			
+			StatusLancamento status = StatusLancamento.valueOf(objDto.getStatus());
+			
+			if(status == null) {
+				return ResponseEntity.badRequest().body("Não foi possível atualizar status do lançamento");
+			}
+			
+			lancamento.setStatusLancamento(status);
+			
+			this.service.atualizar(lancamento);
+			
+			return ResponseEntity.ok(lancamento);
+	}
 	
 	
 
