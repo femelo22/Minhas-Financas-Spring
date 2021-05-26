@@ -37,7 +37,6 @@ public class Lancamento {
 	@Column(name = "mes")
 	private Integer mes;
 	
-	@Size(min = 4, max = 4)
 	@Column(name = "ano")
 	private Integer ano;
 	

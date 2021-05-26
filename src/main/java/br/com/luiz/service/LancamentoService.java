@@ -102,7 +102,7 @@ public class LancamentoService {
 		
 		lancamento.setDescricao(objDto.getDescricao());
 		lancamento.setAno(objDto.getAno());
-		lancamento.setMes(objDto.getAno());
+		lancamento.setMes(objDto.getMes());
 		lancamento.setValor(objDto.getValor());
 		
 		Usuario usuario = this.userRepository.findById(objDto.getIdUsuario())

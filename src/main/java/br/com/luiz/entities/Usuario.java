@@ -31,6 +31,8 @@ public class Usuario {
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
 	}
+	
+	public Usuario () {}
 
 	public Integer getId() {
 		return id;
