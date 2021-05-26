@@ -40,12 +40,12 @@ public class Lancamento {
 	@Column(name = "ano")
 	private Integer ano;
 	
+	@Column(name = "valor")
+	private BigDecimal valor;
+	
 	@JoinColumn(name = "id_usuario")
 	@ManyToOne
 	private Usuario usuario;
-	
-	@Column(name = "valor")
-	private BigDecimal valor;
 	
 	@Column(name = "data_cadastro")
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
@@ -58,6 +58,7 @@ public class Lancamento {
 	@Column(name = "status_lancamento")
 	@Enumerated(value = EnumType.STRING)
 	private StatusLancamento statusLancamento;
+
 	
 	
 

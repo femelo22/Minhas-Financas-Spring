@@ -9,8 +9,8 @@ public class LancamentoDTO {
 	private Integer ano;
 	private BigDecimal valor;
 	private Integer idUsuario;
-	private String tipo;
-	private String status;
+	private String tipoLancamento;
+	private String statusLancamento;
 	
 	
 	public String getDescricao() {
@@ -43,18 +43,19 @@ public class LancamentoDTO {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	public String getTipo() {
-		return tipo;
+	public String getTipoLancamento() {
+		return tipoLancamento;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoLancamento(String tipoLancamento) {
+		this.tipoLancamento = tipoLancamento;
 	}
-	public String getStatus() {
-		return status;
+	public String getStatusLancamento() {
+		return statusLancamento;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatusLancamento(String statusLancamento) {
+		this.statusLancamento = statusLancamento;
 	}
+
 	
 	
 }

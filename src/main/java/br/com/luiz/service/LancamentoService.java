@@ -109,8 +109,14 @@ public class LancamentoService {
 				.orElseThrow(() -> new RegraNegocioException("Usuário não encontrado"));
 		
 		lancamento.setUsuario(usuario);
-		lancamento.setTipoLancamento(TipoLancamento.valueOf(objDto.getTipo()));
-		lancamento.setStatusLancamento(StatusLancamento.valueOf(objDto.getStatus()));
+		
+		if(objDto.getStatusLancamento() == null) {
+			lancamento.setStatusLancamento(StatusLancamento.PENDENTE);
+		}else {
+			lancamento.setStatusLancamento(StatusLancamento.valueOf(objDto.getStatusLancamento()));
+		}
+		
+		lancamento.setTipoLancamento(TipoLancamento.valueOf(objDto.getTipoLancamento()));
 		
 		return lancamento;
 	}

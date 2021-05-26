@@ -76,10 +76,12 @@ public class LancamentoResource {
 	public ResponseEntity atualizar(@PathVariable Integer id, @RequestBody LancamentoDTO objDto) {
 		try {
 			Lancamento lancamento = this.service.obterPorId(id);
+			
+			Lancamento lancamentoAtt = this.service.converterDto(objDto);
+			
+			lancamentoAtt.setId(id);
 
-			lancamento.setId(id);
-
-			this.service.atualizar(lancamento);
+			this.service.atualizar(lancamentoAtt);
 
 			return new ResponseEntity(lancamento, HttpStatus.OK);
 
@@ -87,6 +89,10 @@ public class LancamentoResource {
 			return ResponseEntity.badRequest().body("Lancamento não encontrado na base");
 		}
 	}
+	
+
+	
+	
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity deletar(@PathVariable Integer id) {
@@ -97,11 +103,12 @@ public class LancamentoResource {
 
 			this.service.deletar(lancamento);
 
-			return ResponseEntity.ok(lancamento);
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
 
 		} catch (RegraNegocioException e) {
 			return ResponseEntity.badRequest().body("Lancamento não encontrado na base");
 		}
 	}
+	
 
 }
