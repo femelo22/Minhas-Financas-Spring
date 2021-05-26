@@ -46,5 +46,9 @@ public class UsuarioServiceImpl {
 	public Usuario getUserDto(UsuarioDTO userDto) {
 		return new Usuario(userDto);
 	}
+	
+	public Usuario buscarPorId(Integer id) {
+		return this.repo.findById(id).orElseThrow(() -> new RegraNegocioException("Usuário não encontrado."));
+	}
 
 }
