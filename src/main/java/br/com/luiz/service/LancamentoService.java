@@ -116,6 +116,14 @@ public class LancamentoService {
 	}
 	
 	
+	public Lancamento obterPorId(Integer id) {
+		Lancamento lancamento = this.repository.findById(id)
+				.orElseThrow(() -> new RegraNegocioException("Usuário não encontrado"));
+		
+		return lancamento;
+	}
+	
+	
 	
 	
 }
