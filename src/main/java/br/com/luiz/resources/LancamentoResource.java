@@ -81,7 +81,7 @@ public class LancamentoResource {
 
 			this.service.atualizar(lancamento);
 
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			return new ResponseEntity(lancamento, HttpStatus.OK);
 
 		} catch (RegraNegocioException e) {
 			return ResponseEntity.badRequest().body("Lancamento não encontrado na base");
