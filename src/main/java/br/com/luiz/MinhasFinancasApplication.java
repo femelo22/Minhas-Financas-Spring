@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.com.luiz.entities.Lancamento;
 import br.com.luiz.entities.Usuario;
@@ -15,7 +18,8 @@ import br.com.luiz.service.LancamentoService;
 import br.com.luiz.service.UsuarioService;
 
 @SpringBootApplication
-public class MinhasFinancasApplication implements CommandLineRunner {
+@EnableWebMvc
+public class MinhasFinancasApplication implements CommandLineRunner, WebMvcConfigurer{
 
 	@Autowired
 	UsuarioService userService;
@@ -23,6 +27,12 @@ public class MinhasFinancasApplication implements CommandLineRunner {
 	@Autowired
 	LancamentoService lancamentoService;
 
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+		.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MinhasFinancasApplication.class, args);
 	}
