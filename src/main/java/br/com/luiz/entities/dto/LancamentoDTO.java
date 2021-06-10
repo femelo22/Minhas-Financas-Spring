@@ -12,7 +12,24 @@ public class LancamentoDTO {
 	private String tipoLancamento;
 	private String statusLancamento;
 	
+	public LancamentoDTO () {}
 	
+	
+	public LancamentoDTO(String descricao, Integer mes, Integer ano, BigDecimal valor, Integer idUsuario,
+			String tipoLancamento, String statusLancamento) {
+		super();
+		this.descricao = descricao;
+		this.mes = mes;
+		this.ano = ano;
+		this.valor = valor;
+		this.idUsuario = idUsuario;
+		this.tipoLancamento = tipoLancamento;
+		this.statusLancamento = statusLancamento;
+	}
+
+
+
+
 	public String getDescricao() {
 		return descricao;
 	}
