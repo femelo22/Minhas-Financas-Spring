@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,7 +20,7 @@ import br.com.luiz.service.UsuarioService;
 
 @SpringBootApplication
 @EnableWebMvc
-public class MinhasFinancasApplication implements CommandLineRunner, WebMvcConfigurer{
+public class MinhasFinancasApplication extends SpringBootServletInitializer implements CommandLineRunner, WebMvcConfigurer {
 
 	@Autowired
 	UsuarioService userService;
